@@ -12,6 +12,7 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  gettext
+BuildRequires:  make
 
 Requires:       nautilus-python
 Requires:       glib2
