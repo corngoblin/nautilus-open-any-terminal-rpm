@@ -28,7 +28,7 @@ An extension for nautilus, which adds an context-entry for opening other termina
 make 
 
 %install
-make DESTDIR=%{buildroot} install-nautilus schema 
+make install-nautilus schema 
 
 %post
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
