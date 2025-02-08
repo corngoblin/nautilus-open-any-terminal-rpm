@@ -8,25 +8,27 @@ URL:            https://github.com/Stunkymonkey/nautilus-open-any-terminal
 Source:         %{url}/archive/refs/tags/%{version}.tar.gz
 
 BuildArch:      noarch
+
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  gettext
-BuildRequires:  make
 
 Requires:       nautilus-python
 Requires:       glib2
+
+%global _python_dist_allow_version_zero 1
 
 %description
 An extension for nautilus, which adds an context-entry for opening other terminal emulators than gnome-terminal.
 
 %prep
-%autosetup -n %{name}-%{version}
+{{{ git_dir_setup_macro }}}
 
 %build
-make
+%{python3} setup.py build
 
 %install
-make install
+%{python3} setup.py install --root="%{buildroot}" --optimize=1
 
 %post
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
@@ -37,4 +39,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{python3_sitelib}/nautilus_open_any_terminal*
 %{_datadir}/glib-2.0/schemas/com.github.stunkymonkey.%{name}.gschema.xml
 %{_datadir}/locale/*/LC_MESSAGES/%{name}.mo
-%{_datadir}/nautilus-python/extensions/open_any_terminal_extension.py
+%{_datadir}/nautilus-python/extensions/nautilus_open_any_terminal.py
+%{_datadir}/caja-python/extensions/nautilus_open_any_terminal.py
+
