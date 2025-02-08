@@ -22,13 +22,13 @@ Requires:       glib2
 An extension for nautilus, which adds an context-entry for opening other terminal emulators than gnome-terminal.
 
 %prep
-{{{ git_dir_setup_macro }}}
+%autosetup -n %{name}-%{version}
 
 %build
-%{python3} setup.py build
+make 
 
 %install
-%{python3} setup.py install --root="%{buildroot}" --optimize=1
+make DESTDIR=%{buildroot} install-nautilus schema 
 
 %post
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
@@ -40,5 +40,4 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/glib-2.0/schemas/com.github.stunkymonkey.%{name}.gschema.xml
 %{_datadir}/locale/*/LC_MESSAGES/%{name}.mo
 %{_datadir}/nautilus-python/extensions/nautilus_open_any_terminal.py
-%{_datadir}/caja-python/extensions/nautilus_open_any_terminal.py
 
