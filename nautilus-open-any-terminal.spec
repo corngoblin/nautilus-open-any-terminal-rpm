@@ -22,10 +22,10 @@ An extension for nautilus, which adds an context-entry for opening other termina
 %autosetup -n %{name}-%{version}
 
 %build
-%{python3} setup.py build
+%{python3} pypa build
 
 %install
-%{python3} setup.py install --root="%{buildroot}" --optimize=1
+%{python3} pypa install --root="%{buildroot}" --optimize=1
 
 %post
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
