@@ -29,7 +29,7 @@ An extension for nautilus, which adds an context-entry for opening other termina
 make 
 
 %install
-make install-nautilus schema 
+make install-nautilus DESTDIR=%{buildroot}
 
 %post
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
